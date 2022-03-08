@@ -7,6 +7,14 @@ public class City {
     private int population;
     private String foundation;
 
+    public City(String name, String region, String distinct, int population, String foundation) {
+        this.name = name;
+        this.region = region;
+        this.distinct = distinct;
+        this.population = population;
+        this.foundation = foundation;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -29,6 +37,10 @@ public class City {
 
     public void setPopulation(int population) {
         this.population = population;
+    }
+
+    public int getPopulation() {
+        return population;
     }
 
     public void setFoundation(String foundation) {

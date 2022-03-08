@@ -1,51 +1,27 @@
 import comporator.SortByDistinctThenName;
-import comporator.SortByName;
 import model.City;
-
-import java.io.*;
 import java.util.*;
 
+import static utils.CityUtils.*;
+
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(
-                "city_ru.csv"));
-        String line = null;
-        Scanner scanner = null;
-        int index = 0;
-        List<City> cityList = new LinkedList<>();
-        while ((line = reader.readLine()) != null) {
-            City city = new City();
-            scanner = new Scanner(line);
-            scanner.useDelimiter(";");
-            while (scanner.hasNext()) {
-                String data = scanner.next();
-                switch (index) {
-                    case 1:
-                        city.setName(data);
-                        break;
-                    case 2:
-                        city.setRegion(data);
-                        break;
-                    case 3:
-                        city.setDistinct(data);
-                        break;
-                    case 4:
-                        city.setPopulation(Integer.parseInt(data));
-                        break;
-                    case 5:
-                        city.setFoundation(data);
-                        break;
-                }
-                index++;
-            }
-            index = 0;
-            cityList.add(city);
-        }
-        reader.close();
+    public static void main(String[] args) {
+        List<City> cityList = parse();
+
+        //Сортировка по городу в обратном порядке
         //Collections.sort(cityList, new SortByName().reversed());
-        Collections.sort(cityList, new SortByDistinctThenName());
-        for (City city : cityList) {
+        //Сортировка по округу, затем по имени
+        //Collections.sort(cityList, new SortByDistinctThenName());
+
+        //Поиск индекса (города) с наибольшим количеством жителей
+        City[] cityArray = cityList.stream().toArray(City[]::new);
+        City city1 = Arrays.stream(cityArray).max(Comparator.comparing(City::getPopulation)).get();
+        int index = Arrays.stream(cityArray).toList().indexOf(city1);
+        System.out.println("["+index+"] = "+city1.getPopulation());
+       /* for (City city : cityArray) {
             System.out.println(city);
-        }
+        }*/
+        //System.out.println(cityArray);
     }
+
 }
