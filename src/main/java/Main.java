@@ -1,4 +1,3 @@
-import comporator.SortByDistinctThenName;
 import model.City;
 
 import java.text.MessageFormat;
@@ -14,20 +13,11 @@ public class Main {
         //Collections.sort(cityList, new SortByName().reversed());
         //Сортировка по округу, затем по имени
         //Collections.sort(cityList, new SortByDistinctThenName());
-
         //Поиск индекса (города) с наибольшим количеством жителей
         findBySimpleBruteForce(cityList);
-        /*City[] cityArray = cityList.stream().toArray(City[]::new);
-        City city1 = Arrays.stream(cityArray).max(Comparator.comparing(City::getPopulation)).get();
-        int index = Arrays.stream(cityArray).toList().indexOf(city1);
-        System.out.println("["+index+"] = "+city1.getPopulation());*/
-
+        //Печать количество городов поп региону
         findCityCountByRegion(cityList);
 
-        /*for (City city : cityArray) {
-            System.out.println(city);
-        }*/
-        //System.out.println(cityArray);
     }
 
     private static void findBySimpleBruteForce(List<City> cities) {
@@ -44,19 +34,18 @@ public class Main {
         }
         System.out.println(MessageFormat.format("[{0}] = {1}", index, array[index]));
     }
-    private static void findCityCountByRegion(List<City> cities){
-        Map<String, Integer> cityCount = new HashMap<>();                       
-        for (City city:cities){
-            if(cityCount.get(city.getRegion())==null){
+
+    private static void findCityCountByRegion(List<City> cities) {
+        Map<String, Integer> cityCount = new HashMap<>();
+        for (City city : cities) {
+            if (cityCount.get(city.getRegion()) == null) {
                 cityCount.put(city.getRegion(), 1);
             } else {
-                cityCount.put(city.getRegion(), cityCount.get(city.getRegion())+1);
+                cityCount.put(city.getRegion(), cityCount.get(city.getRegion()) + 1);
             }
-
         }
-        for(Map.Entry<String, Integer> entry:cityCount.entrySet()){
-            System.out.println(entry.getKey()+" - "+entry.getValue());
+        for (Map.Entry<String, Integer> entry : cityCount.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue());
         }
-
     }
 }

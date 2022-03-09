@@ -26,7 +26,7 @@ public class CityUtils {
     private static City parseCityFromString(String line) {
         Scanner scanner = new Scanner(line);
         scanner.useDelimiter(";"); // Задается разделитель в строке с данными
-        scanner.skip("\\d*"); // Необходимо пропустить значение номера строки по условиям задачи
+        scanner.skip("\\d*"); // Пропускаем значение номера строки по условиям задачи
         String name = scanner.next();
         String region = scanner.next();
         String district = scanner.next();
@@ -38,5 +38,4 @@ public class CityUtils {
         scanner.close();
         return new City(name, region, district, population, foundation);
     }
-
 }
