@@ -27,6 +27,10 @@ public class City {
         this.region = region;
     }
 
+    public String getRegion() {
+        return region;
+    }
+
     public void setDistinct(String distinct) {
         this.distinct = distinct;
     }
